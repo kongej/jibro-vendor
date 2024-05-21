@@ -26,15 +26,5 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	/* 출고해야 하는 제품 상세 받아오기 */
-	@GetMapping("/ongoing/create/{orderId}")
-	public ModelAndView getProduct(
-			@PathVariable String orderId) {
-		ModelAndView mav = new ModelAndView();
-		
-		ProductOrderDto productOrderDto = this.productService.getProduct(orderId);
-		
-		mav.setViewName("/ongoing/create");
-		return mav;
-	}
+
 }

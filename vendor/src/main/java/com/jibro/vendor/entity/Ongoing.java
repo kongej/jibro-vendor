@@ -45,6 +45,10 @@ public class Ongoing extends BaseEntity {
 	@Builder.Default
 	private Integer sendOngoing = 0;
 
+	/* 풀필먼트 측에 실제로 보낸 제품 수량 */
+	@Column(name = "real_quantity", nullable = false)
+	private Integer realQuantity;
+	
 	/* 주문번호(fk), 일대일 매핑 */
 	@OneToOne(fetch = FetchType.LAZY) // 주문 entity는 즉시 로딩 x
 	@JoinColumn(name = "order_id")
