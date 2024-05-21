@@ -1,6 +1,6 @@
 package com.jibro.vendor.service;
 
-import com.jibro.vendor.dto.product.ProductResponseDto;
+import com.jibro.vendor.dto.product.ProductOrderDto;
 
 /**
  * @author ljy
@@ -10,6 +10,6 @@ import com.jibro.vendor.dto.product.ProductResponseDto;
 public interface ProductService {
 	
 	/* 출고해야 하는 제품 상세 받아오기 */
-	ProductResponseDto getProduct(String orderId);
+	ProductOrderDto getProduct(String orderId);
 
 }
