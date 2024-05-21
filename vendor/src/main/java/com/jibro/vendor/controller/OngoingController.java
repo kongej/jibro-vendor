@@ -37,7 +37,7 @@ public class OngoingController {
 		List<OngoingResponseDto> ongoingResponseDto = this.ongoingService.getOngoingList();
 		
 		mav.addObject("ongoingResponseDto", ongoingResponseDto);
-		mav.setViewName("/ongoing/list");
+		mav.setViewName("ongoing/list");
 		return mav;
 	}
 	
