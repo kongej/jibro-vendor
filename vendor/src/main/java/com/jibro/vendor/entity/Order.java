@@ -19,7 +19,8 @@ import lombok.ToString;
 
 /**
  * @author ljy
- * @since 2024.05.21 Order entity 코드
+ * @since 2024.05.21
+ * Order entity 코드
  **/
 @Entity
 @Getter
@@ -50,14 +51,14 @@ public class Order extends BaseEntity {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
-	/*
-	 * 제품번호(fk)
-	 * 
-	 * @Column(name = "product_id") private String productId;
-	 * 
-	 * productId만 넣어도 엔티티 객체 생성 가능하도록 조치 public Order(String productId) {
-	 * this.productId = productId; }
-	 */
+	 /* 제품번호(fk) */
+	 /* @Column(name = "product_id") 
+	 private String productId; */
+	 
+	  /* productId만 넣어도 엔티티 객체 생성 가능하도록 조치 */ 
+	 /* public Order(String productId) {
+	 	this.productId = productId; 
+	 } */
 
 	/* OneToOne 양방향 관계 매핑(ongoing) : toString 제외 */
 	@OneToOne(mappedBy = "order", fetch = FetchType.LAZY)

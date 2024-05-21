@@ -1,5 +1,9 @@
 package com.jibro.vendor.repository;
 
-public interface OngoingRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.jibro.vendor.entity.Ongoing;
+
+public interface OngoingRepository extends JpaRepository<Ongoing, Long> {
 
 }
