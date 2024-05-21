@@ -4,6 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jibro.vendor.service.OngoingService;
 
@@ -21,6 +24,18 @@ public class OngoingController {
 	// 의존성 주입(OngoingService)
 	@Autowired
 	private OngoingService ongoingService;
-		
-		
+	
+	/* 출고 리스트 조회 */
+	@GetMapping("/ongoing/list")
+	public ModelAndView getOngoingList() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/ongoing/list");
+		return mav;
+	}
+	
+	/* 출고 신규 생성 */
+	@PostMapping("/ongoing/create")
+	public String createOngoing() {
+		return "redirect:/ongoing/list";
+	}
 }

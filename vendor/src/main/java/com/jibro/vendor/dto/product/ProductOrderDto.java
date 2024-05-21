@@ -3,9 +3,9 @@ package com.jibro.vendor.dto.product;
 /**
  * @author ljy
  * @since 2024.05.21
- * Product 기본 dto 코드
+ * 출고 화면 들어갔을 시 제품 상세, 주문 정보 담아 전달하는 역할
  * **/
-public class ProductDto {
+public class ProductOrderDto {
 
 	/* 제품번호(pk) */
 	private String productId;
