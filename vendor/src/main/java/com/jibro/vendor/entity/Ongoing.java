@@ -50,13 +50,10 @@ public class Ongoing extends BaseEntity {
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	/*
-	 * 주문번호(fk)
-	 * 
-	 * @Column(name = "order_id") private String orderId;
-	 * 
-	 * orderId만 넣어도 엔티티 객체 생성 가능하도록 조치 public Ongoing(String orderId) { this.orderId
-	 * = orderId; }
-	 */
+	/* 주문번호(fk)*/
+	/* @Column(name = "order_id") private String orderId; */
+	 
+	/* orderId만 넣어도 엔티티 객체 생성 가능하도록 조치 */
+	/* public Ongoing(String orderId) { this.orderId = orderId; } */
 
 }
