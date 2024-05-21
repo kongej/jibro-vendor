@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jibro.vendor.service.OrderService;
 
@@ -21,4 +23,12 @@ public class OrderController {
 	// 의존성 주입(OrderService)
 	@Autowired
 	private OrderService orderService;
+	
+	/* 주문 리스트 조회 */
+	@GetMapping("/order/list")
+	public ModelAndView getOrderList() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/order/list");
+		return mav;
+	}
 }

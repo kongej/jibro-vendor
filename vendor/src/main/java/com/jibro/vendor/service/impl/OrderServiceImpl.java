@@ -1,10 +1,13 @@
 package com.jibro.vendor.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jibro.vendor.dto.order.OrderResponseDto;
 import com.jibro.vendor.repository.OrderRepository;
 import com.jibro.vendor.service.OrderService;
 
@@ -24,6 +27,13 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	public OrderServiceImpl(OrderRepository orderRepository) {
 		this.orderRepository = orderRepository;
+	}
+
+	/* 주문 리스트 조회 */
+	@Override
+	public List<OrderResponseDto> getOrderList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

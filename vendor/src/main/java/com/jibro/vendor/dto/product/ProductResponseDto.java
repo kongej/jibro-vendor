@@ -5,7 +5,7 @@ package com.jibro.vendor.dto.product;
  * @since 2024.05.21
  * Product 기본 dto 코드
  * **/
-public class ProductDto {
+public class ProductResponseDto {
 
 	/* 제품번호(pk) */
 	private String productId;
