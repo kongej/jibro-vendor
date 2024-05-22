@@ -46,19 +46,15 @@ public class Order extends BaseEntity {
 	@Column(name = "vendor_quantity", nullable = false)
 	private Integer vendorQuantity;
 
+	/* 출고 진행했는지 여부 (미완 0, 완료 1) */
+	@Column(name = "order_status", nullable = false, columnDefinition = "int default 0") //
+	@Builder.Default
+	private Integer orderStatus = 0;//
+	
 	/* product 외래키 지정(ManyToOne) : toString 제외 */
 	@ManyToOne(targetEntity = Product.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
-
-	 /* 제품번호(fk) */
-	 /* @Column(name = "product_id") 
-	 private String productId; */
-	 
-	  /* productId만 넣어도 엔티티 객체 생성 가능하도록 조치 */ 
-	 /* public Order(String productId) {
-	 	this.productId = productId; 
-	 } */
 
 	/* OneToOne 양방향 관계 매핑(ongoing) : toString 제외 */
 	@OneToOne(mappedBy = "order", fetch = FetchType.LAZY)

@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>출고 처리 페이지</title>
+</head>
+<body>
+	<h1>입고 요청 상세 정보</h1>
+	<p><label>주문번호</label> : <span th:text="${productOrderDto.orderId}"></span></p>
+	<p><label>거래처명</label> : <span th:text="${productOrderDto.companyName}"></span></p>
+	<p><label>요청수량</label> : <span th:text="${productOrderDto.vendorQuantity}"></span></p>
+	<p><label>요청날짜</label> : <span th:text="${#temporals.format(productOrderDto.createdAt, 'yyyy-MM-dd')}"></span></p>
+	
+	<h1>제품 상세 정보</h1>
+	<p><label>제품번호</label> : <span th:text="${productOrderDto.productId}"></span></p>
+	<p><label>제품명</label> : <span th:text="${productOrderDto.product}"></span></p>
+	<p><label>요청수량</label> : <span th:text="${productOrderDto.vendorQuantity}"></span></p>
+	<p><label>원가</label> : <span th:text="${productOrderDto.primeCost}"></span></p>
+	
+	<form method="POST" th:action="@{/ongoing/create}" th:object="${ongoingCreateDto}">
+		<input type="hidden" name="orderId" th:value="${productOrderDto.orderId}" />
+		<input type="number" name="selectedCount" th:value="${productOrderDto.vendorQuantity}" min="1" required />
+		<input type="submit" value="출고" />
+	</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</html>

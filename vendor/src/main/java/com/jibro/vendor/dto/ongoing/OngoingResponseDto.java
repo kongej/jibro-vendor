@@ -2,6 +2,8 @@ package com.jibro.vendor.dto.ongoing;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,6 +43,15 @@ public class OngoingResponseDto {
 	
 	/* 제품 이름 */
 	private String product;
+	
+	/* 요청수량 */
+	private int vendorQuantity;
+	
+	/* 풀필먼트 측에 실제로 보낸 제품 수량 */
+	private int realQuantity;
+	
+	/* 출고 시점 총 가격 */
+	private Integer totalCost;
 	
 	/* 출고 날짜 */
 	private LocalDateTime createdAt;

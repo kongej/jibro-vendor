@@ -59,6 +59,8 @@ public class OrderServiceImpl implements OrderService {
 			orderResponseDto.setCreatedAt(order.getCreatedAt());
 			// 주문 업데이트된 일자
 			orderResponseDto.setUpdatedAt(order.getUpdatedAt());
+			// 출고 진행 여부
+			orderResponseDto.setOrderStatus(order.getOrderStatus());
 			// 주문한 상품 id
 			orderResponseDto.setProductId(order.getProduct().getProductId());
 			// 주문 상품명
@@ -89,10 +91,14 @@ public class OrderServiceImpl implements OrderService {
 		returnProductInfo.setVendorQuantity(order.getVendorQuantity());
 		// 주문 날짜
 		returnProductInfo.setCreatedAt(order.getCreatedAt());
+		// 주문한 상품 Id
+		returnProductInfo.setProductId(order.getProduct().getProductId());
 		// 주문한 상품명
 		returnProductInfo.setProduct(order.getProduct().getProduct());
 		// 주문한 상품 원가
 		returnProductInfo.setPrimeCost(order.getProduct().getPrimeCost());
+		// 이미지
+		returnProductInfo.setImg(order.getProduct().getImg());
 		
 		LOGGER.info("[getProduct] set ProductOrderDto : {}", returnProductInfo);
 		return returnProductInfo;
