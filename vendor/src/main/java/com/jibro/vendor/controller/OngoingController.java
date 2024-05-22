@@ -34,20 +34,23 @@ public class OngoingController {
 	public ModelAndView getOngoingList() {
 		ModelAndView mav = new ModelAndView();
 		
-		List<OngoingResponseDto> ongoingResponseDto = this.ongoingService.getOngoingList();
+		List<OngoingResponseDto> ongoingList = this.ongoingService.getOngoingList();
 		
-		mav.addObject("ongoingResponseDto", ongoingResponseDto);
+		mav.addObject("ongoingList", ongoingList);
 		mav.setViewName("ongoing/list");
 		return mav;
 	}
 	
 	/* 출고 신규 생성 */
 	@PostMapping("/ongoing/create")
-	public String createOngoing(OngoingCreateDto ongoingCreateDto) {
-		String nextPath = "redirect:/ongoing/list";
-		
+	public ModelAndView createOngoing(OngoingCreateDto ongoingCreateDto) {
+		String nextPath = "/ongoing/list";
+		ModelAndView mav = new ModelAndView();
 		String result = this.ongoingService.createOngoing(ongoingCreateDto);
 		
-		return nextPath;
+		mav.addObject("message", "출고가 완료되었습니다. (출고번호: " + result + ")");
+		mav.addObject("location", nextPath);
+		mav.setViewName("common/check");
+		return mav;
 	}
 }
