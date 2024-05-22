@@ -19,7 +19,7 @@ import lombok.ToString;
 public class OngoingCreateDto {
 
 	/* 선택 수량 */
-	private Integer productCount;
+	private Integer selectedCount;
 
 	/* 주문번호(fk)*/
 	private String orderId;

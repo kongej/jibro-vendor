@@ -2,6 +2,8 @@ package com.jibro.vendor.dto.product;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,10 +35,13 @@ public class ProductOrderDto {
 	private LocalDateTime createdAt;
 
 	/* 제품번호(pk) */
-	// private String productId;
+	private String productId;
 	
 	/* 제품명 */
 	private String product;
+	
+	/* 이미지 */
+	private String img;
 	
 	/*  원가 */
 	private Integer primeCost;
