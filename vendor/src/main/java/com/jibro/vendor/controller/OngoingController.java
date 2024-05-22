@@ -47,7 +47,15 @@ public class OngoingController {
 		String nextPath = "/ongoing/list";
 		ModelAndView mav = new ModelAndView();
 		String result = this.ongoingService.createOngoing(ongoingCreateDto);
-		
+
+		/* Api로 출고내역 전달 */
+		String ApiStatus = this.ongoingService.ongoingApi(result);
+		if (ApiStatus.equals("success")){
+			System.out.println("데이터 전송 완료");
+		} else {
+			System.out.println("데이터 전송 실패");
+		}
+
 		mav.addObject("message", "출고가 완료되었습니다. (출고번호: " + result + ")");
 		mav.addObject("location", nextPath);
 		mav.setViewName("common/check");
