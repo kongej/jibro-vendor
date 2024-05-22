@@ -35,6 +35,9 @@ public class OrderResponseDto {
 	/* 제품 이름 */
 	private String product;
 	
+	/* 출고 진행했는지 여부 (미완 0, 완료 1) */
+	private int orderStatus;
+	
 	/* 주문 날짜 */
 	private LocalDateTime createdAt;
 	

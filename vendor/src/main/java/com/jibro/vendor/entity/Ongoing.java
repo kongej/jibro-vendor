@@ -41,7 +41,7 @@ public class Ongoing extends BaseEntity {
 	private Long ongoingId;
 
 	/* 풀필먼트 측에 출고 정보 넘겼는지 여부 */
-	@Column(name = "send_ongoing", nullable = false)
+	@Column(name = "send_ongoing", nullable = false, columnDefinition = "int default 0")
 	@Builder.Default
 	private Integer sendOngoing = 0;
 
@@ -49,15 +49,13 @@ public class Ongoing extends BaseEntity {
 	@Column(name = "real_quantity", nullable = false)
 	private Integer realQuantity;
 	
+	/* 출고 시점 총 가격 */
+	@Column(name = "total_cost", nullable = false)
+	private Integer totalCost;
+	
 	/* 주문번호(fk), 일대일 매핑 */
 	@OneToOne(fetch = FetchType.LAZY) // 주문 entity는 즉시 로딩 x
 	@JoinColumn(name = "order_id")
 	private Order order;
-
-	/* 주문번호(fk)*/
-	/* @Column(name = "order_id") private String orderId; */
-	 
-	/* orderId만 넣어도 엔티티 객체 생성 가능하도록 조치 */
-	/* public Ongoing(String orderId) { this.orderId = orderId; } */
 
 }

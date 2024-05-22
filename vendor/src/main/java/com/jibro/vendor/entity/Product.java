@@ -50,6 +50,10 @@ public class Product extends BaseEntity {
 	@Column(name = "prime_cost", nullable = false)
 	private Integer primeCost;
 	
+	/* 이미지 */
+	@Column(name = "img", length = 255)
+	private String img;
+	
 	/* order 엔티티와 OneToMany 매핑 */ 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
