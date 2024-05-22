@@ -2,10 +2,14 @@ package com.jibro.vendor.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import com.jibro.vendor.dto.api.OngoingApiDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +20,10 @@ import com.jibro.vendor.entity.Order;
 import com.jibro.vendor.repository.OngoingRepository;
 import com.jibro.vendor.repository.OrderRepository;
 import com.jibro.vendor.service.OngoingService;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import javax.persistence.EntityNotFoundException;
 
 /**
  * @author ljy
@@ -123,5 +131,40 @@ public class OngoingServiceImpl implements OngoingService {
 		
 		return savedOngoing.getOngoingId().toString();
 	}
-		
+
+	public String ongoingApi(String ongoingId){
+		Ongoing savedOngoing = this.ongoingRepository.findById(Long.valueOf(ongoingId))
+				.orElseThrow(()-> new EntityNotFoundException());
+		Order OrderResponse = this.orderRepository.findById(ongoingId)
+				.orElseThrow(()-> new EntityNotFoundException());
+		System.out.println(OrderResponse.getOrderId());
+		WebClient webClient = WebClient.builder()
+				.baseUrl("http://localhost:9000")
+				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.build();
+
+		OngoingApiDto ongoingApiDto = new OngoingApiDto();
+		ongoingApiDto.setProductId(OrderResponse.getProduct().getProductId());
+		ongoingApiDto.setVendorQuantity(ongoingApiDto.getVendorQuantity());
+		ongoingApiDto.setCompanyName("M001");
+
+		webClient.put().uri(uriBuilder -> uriBuilder.path("/order/update/delivery")
+						.build())
+				.bodyValue(ongoingApiDto)
+				.exchangeToMono(clientResponse -> {
+					if(clientResponse.statusCode().is2xxSuccessful()){
+						System.out.println("데이터 전송 성공");
+						OrderResponse.setOrderStatus(1);
+						return Mono.defer(()-> {
+							orderRepository.save(OrderResponse);
+							return Mono.just("success");
+						});
+					}else {
+						System.out.println("데이터 전송 실패");
+						return Mono.just("fail");
+					}
+				})
+				.block();
+		return null;
+	}
 }
