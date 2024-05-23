@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class OrderApiDto {
+    /* 주문번호(pk, yymmdd_001) */
+    private String orderId;
 
     /* 거래처명(풀필먼트) */
     private String companyName;
