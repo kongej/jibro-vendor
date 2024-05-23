@@ -121,6 +121,7 @@ public class OrderServiceImpl implements OrderService {
 		Product product = productRepository.findById(orderApiDto.getProductId())
 				.orElseThrow(() -> new EntityNotFoundException());
 		Order orderDto = new Order();
+		orderDto.setOrderId(orderApiDto.getOrderId());
 		orderDto.setCompanyName(orderApiDto.getCompanyName());
 		orderDto.setVendorQuantity(orderApiDto.getVendorQuantity());
 		orderDto.setProduct(product);
