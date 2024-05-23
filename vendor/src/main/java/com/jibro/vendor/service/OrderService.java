@@ -2,6 +2,7 @@ package com.jibro.vendor.service;
 
 import java.util.List;
 
+import com.jibro.vendor.dto.api.OrderApiDto;
 import com.jibro.vendor.dto.order.OrderResponseDto;
 import com.jibro.vendor.dto.product.ProductOrderDto;
 
@@ -17,4 +18,7 @@ public interface OrderService {
 	
 	/* 신규 출고 생성을 위해 필요한 데이터 조회 */ 
 	ProductOrderDto makeOrder(String orderId);
+
+	/* Api에서 받아온 데이터 DB에 저장 */
+	void insertOrder(OrderApiDto orderApiDto);
 }
