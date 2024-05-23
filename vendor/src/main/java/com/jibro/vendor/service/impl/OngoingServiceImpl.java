@@ -135,28 +135,30 @@ public class OngoingServiceImpl implements OngoingService {
 	public String ongoingApi(String ongoingId){
 		Ongoing savedOngoing = this.ongoingRepository.findById(Long.valueOf(ongoingId))
 				.orElseThrow(()-> new EntityNotFoundException());
-		Order OrderResponse = this.orderRepository.findById(ongoingId)
+
+		Order orderResponse = this.orderRepository.findById(savedOngoing.getOrder().getOrderId())
 				.orElseThrow(()-> new EntityNotFoundException());
-		System.out.println(OrderResponse.getOrderId());
+
 		WebClient webClient = WebClient.builder()
 				.baseUrl("http://localhost:9000")
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.build();
 
 		OngoingApiDto ongoingApiDto = new OngoingApiDto();
-		ongoingApiDto.setProductId(OrderResponse.getProduct().getProductId());
-		ongoingApiDto.setVendorQuantity(ongoingApiDto.getVendorQuantity());
+		ongoingApiDto.setOrderId(orderResponse.getOrderId());
+		ongoingApiDto.setProductId(orderResponse.getProduct().getProductId());
+		ongoingApiDto.setVendorQuantity(savedOngoing.getRealQuantity());
 		ongoingApiDto.setCompanyName("M001");
 
-		webClient.put().uri(uriBuilder -> uriBuilder.path("/order/update/delivery")
+		webClient.put().uri(uriBuilder -> uriBuilder.path("/incoming/product")
 						.build())
 				.bodyValue(ongoingApiDto)
 				.exchangeToMono(clientResponse -> {
 					if(clientResponse.statusCode().is2xxSuccessful()){
 						System.out.println("데이터 전송 성공");
-						OrderResponse.setOrderStatus(1);
+						savedOngoing.setSendOngoing(1);
 						return Mono.defer(()-> {
-							orderRepository.save(OrderResponse);
+							ongoingRepository.save(savedOngoing);
 							return Mono.just("success");
 						});
 					}else {
