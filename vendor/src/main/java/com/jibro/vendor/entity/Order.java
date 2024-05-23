@@ -29,8 +29,6 @@ public class Order extends BaseEntity {
 
 	/* 주문번호(pk, yymmdd_001) */
 	@Id
-	@GeneratedValue(generator = "IdGenerator")
-	@GenericGenerator(name = "IdGenerator", strategy = "com.jibro.vendor.entity.IdGenerator")
 	@Column(name = "order_id", length = 50)
 	private String orderId;
 
