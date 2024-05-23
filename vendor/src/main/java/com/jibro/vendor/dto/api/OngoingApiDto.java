@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OngoingApiDto {
+    /* 주문번호(pk, yymmdd_001) */
+    private String orderId;
     /* 제품번호 */
     private String productId;
     /* 요청수량 */
